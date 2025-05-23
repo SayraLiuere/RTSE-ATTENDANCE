@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Smart Attendance System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <h1>RFID Smart Attendance</h1>
+            <div class="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button onclick="login()" class="btn-primary">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav id="mainNav" class="hidden">
+        <div class="nav-container">
+            <h2>RFID Smart Attendance</h2>
+            <div class="nav-links">
+                <button onclick="showPage('scanPage')" class="nav-btn active">
+                    <i class="fas fa-id-card"></i> Scan
+                </button>
+                <button onclick="showPage('recordsPage')" class="nav-btn">
+                    <i class="fas fa-list"></i> Records
+                </button>
+                <button onclick="logout()" class="nav-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scan Page -->
+    <div id="scanPage" class="page">
+        <div class="scan-container">
+            <h2>Scan Your RFID</h2>
+            <div class="scan-area" onclick="simulateScan()">
+                <i class="fas fa-id-card"></i>
+                <p>Click to simulate RFID scan</p>
+            </div>
+            <div id="scanMessage" class="message"></div>
+        </div>
+    </div>
+
+    <!-- Records Page -->
+    <div id="recordsPage" class="page">
+        <div class="records-container">
+            <h2>Attendance Records</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by name or date...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="table-container">
+                <table id="attendanceTable">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceRecords">
+                        <!-- Records will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
