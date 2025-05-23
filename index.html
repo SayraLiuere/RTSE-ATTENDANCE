@@ -32,12 +32,27 @@
         <div class="nav-container">
             <h2>RFID Smart Attendance</h2>
             <div class="nav-links">
-                <button onclick="showPage('scanPage')" class="nav-btn active">
-                    <i class="fas fa-id-card"></i> Scan
-                </button>
-                <button onclick="showPage('recordsPage')" class="nav-btn">
-                    <i class="fas fa-list"></i> Records
-                </button>
+                <!-- Regular user navigation -->
+                <div id="userNav" class="nav-section">
+                    <button onclick="showPage('scanPage')" class="nav-btn active">
+                        <i class="fas fa-id-card"></i> Scan
+                    </button>
+                    <button onclick="showPage('recordsPage')" class="nav-btn">
+                        <i class="fas fa-list"></i> Records
+                    </button>
+                </div>
+                <!-- Admin navigation -->
+                <div id="adminNav" class="nav-section hidden">
+                    <button onclick="showPage('adminDashboard')" class="nav-btn active">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </button>
+                    <button onclick="showPage('adminRecords')" class="nav-btn">
+                        <i class="fas fa-users"></i> Student Status
+                    </button>
+                    <button onclick="showPage('adminHistory')" class="nav-btn">
+                        <i class="fas fa-history"></i> Attendance History
+                    </button>
+                </div>
                 <button onclick="logout()" class="nav-btn">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
@@ -77,6 +92,126 @@
                     </thead>
                     <tbody id="attendanceRecords">
                         <!-- Records will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="page">
+        <div class="dashboard-container">
+            <h2>Attendance Dashboard</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-user-check"></i>
+                    <h3>Present Today</h3>
+                    <p id="presentToday">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-user-times"></i>
+                    <h3>Absent Today</h3>
+                    <p id="absentToday">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Average Arrival</h3>
+                    <p id="avgArrival">--:--</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-filters">
+                <select id="dateFilter" onchange="updateDashboard()">
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="week">This Week</option>
+                </select>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="grid-section">
+                    <h3>Recent Arrivals</h3>
+                    <div class="recent-arrivals" id="recentArrivals">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="grid-section">
+                    <h3>Late Arrivals</h3>
+                    <div class="late-arrivals" id="lateArrivals">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Student Status -->
+    <div id="adminRecords" class="page">
+        <div class="records-container">
+            <h2>Student Attendance Status</h2>
+            <div class="admin-controls">
+                <div class="search-bar">
+                    <input type="text" id="studentSearch" placeholder="Search student...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <select id="statusFilter" onchange="updateStudentStatus()">
+                    <option value="all">All Students</option>
+                    <option value="present">Present Today</option>
+                    <option value="absent">Absent Today</option>
+                </select>
+            </div>
+            <div class="table-container">
+                <table id="studentStatusTable">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Status</th>
+                            <th>Arrival Time</th>
+                            <th>Last Seen</th>
+                            <th>Attendance Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentStatusRecords">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Attendance History -->
+    <div id="adminHistory" class="page">
+        <div class="records-container">
+            <h2>Detailed Attendance History</h2>
+            <div class="admin-controls">
+                <div class="date-range">
+                    <input type="date" id="startDate" onchange="updateAttendanceHistory()">
+                    <span>to</span>
+                    <input type="date" id="endDate" onchange="updateAttendanceHistory()">
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="historySearch" placeholder="Search student...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="attendanceHistoryTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Student Name</th>
+                            <th>Arrival Time</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceHistoryRecords">
+                        <!-- Will be populated by JavaScript -->
                     </tbody>
                 </table>
             </div>
